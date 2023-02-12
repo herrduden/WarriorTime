@@ -18,6 +18,13 @@
                         </div>*@
                         <h4>Welcome</h4>
                         <h6 class="fw-light">Sign in to continue.</h6>
+                        @if (TempData["PermissionDenied"] != null && (int)TempData["PermissionDenied"]== 1)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                Access is denied please try again!
+                            </div>
+                        }
+                       
                         <form class="pt-3" asp-controller="Login" asp-action="VerifyCredentials" method="post">
                             <div class="form-group">
                                 <input type="email" asp-for="Email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="mail">

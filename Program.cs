@@ -12,6 +12,14 @@ namespace warriorTime
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.Name = ".WarriorTime.Session";
+                options.IdleTimeout = TimeSpan.FromHours(2);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+            });
             string _connexionString=builder.Configuration.GetConnectionString("defaultMySQLCo");
             builder.Services.AddDbContext<WarriorTimeContext>(options => options.UseMySql(_connexionString, ServerVersion.AutoDetect(_connexionString)));
             var app = builder.Build();
@@ -28,6 +36,7 @@ namespace warriorTime
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
