@@ -30,11 +30,8 @@ namespace warriorTime.Models
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseMySql("server=localhost;user=root;database=warriortime", Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.7.36-mysql"));
-                //se co a la db
             }
         }
-
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -187,6 +184,9 @@ namespace warriorTime.Models
 
                 entity.HasCharSet("utf8")
                     .UseCollation("utf8_general_ci");
+
+                entity.HasIndex(e => e.Email, "Email")
+                    .IsUnique();
 
                 entity.Property(e => e.IdEtudiant)
                     .HasColumnType("int(11)")

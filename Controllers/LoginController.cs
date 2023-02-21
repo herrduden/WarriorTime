@@ -9,6 +9,7 @@ namespace warriorTime.Controllers
     {
         private readonly ILogger<LoginController> _logger;
         private readonly WarriorTimeContext _context;
+/**/
         // le nom du controler doit avoir le meme nom que le dossier 
         // chaque methode doit porter le meme nom que la vue 
 
@@ -47,21 +48,31 @@ namespace warriorTime.Controllers
             /*Console.WriteLine("vous etes co");
             Console.WriteLine("votre login est : "+data.Email);
             Console.WriteLine("votre pass est : " +data.Password);*/
-            
-            var student = _context.Etudiants.Where(studentCredentials => studentCredentials.Email.Equals(data.Email) && studentCredentials.Mdp.Equals(data.Password)).FirstOrDefault();
-
-           /* studentCredentials est une variable temporaire qui prendra successivement une ligne depuis ma table etudiant*/
-           if (student != null)
+            if (data.userType.Equals("student"))
             {
-                /*to do: on ouvre la session */
-                HttpContext.Session.SetString("nom", student.Nom);
-                HttpContext.Session.SetString("prenom", student.Prenom);
-                HttpContext.Session.SetString("email", student.Email);
-                HttpContext.Session.SetString("telephone", student.Telephone);
-                HttpContext.Session.SetInt32("id", student.IdEtudiant);
-            /*on redirige le user vers la page de dashboard*/
-                return RedirectToAction(actionName:"DashBoard",controllerName:"Intern");
+                var student = _context.Etudiants.Where(studentCredentials => studentCredentials.Email.Equals(data.Email) && studentCredentials.Mdp.Equals(data.Password)).FirstOrDefault();
+                /*grace a pomeloo " _context.Etudiants.Where " va me generate une requete */
+                /* studentCredentials est une variable temporaire qui prendra successivement une ligne depuis ma table etudiant*/
+                if (student != null)
+                {
+                    /*to do: on ouvre la session */
+                    HttpContext.Session.SetString("nom", student.Nom);
+                    HttpContext.Session.SetString("prenom", student.Prenom);
+                    HttpContext.Session.SetString("email", student.Email);
+                    HttpContext.Session.SetString("telephone", student.Telephone);
+                    HttpContext.Session.SetInt32("id", student.IdEtudiant);
+                    /*on redirige le user vers la page de dashboard*/
+                    return RedirectToAction(actionName: "DashBoard", controllerName: "Intern");
+                }
             }
+            else
+            {
+                Console.WriteLine("coach connexion to be implemented");
+                return RedirectToAction(actionName: "LoginPage", controllerName: "Login");
+            }
+            
+         
+            TempData["signInFailed"] = 1;
             return RedirectToAction(actionName: "LoginPage", controllerName: "Login");
 
             /*Console.WriteLine(student.Nom); */
@@ -97,7 +108,45 @@ namespace warriorTime.Controllers
         }
         // a chque fois que je click vers un bouton elle me renvoit vers une methode
 
+        public IActionResult RegisterInfo(BluePrintSignUp data)
+        {
+            /*
+                        Console.WriteLine(data.phoneNumber);
+                        Console.WriteLine(data.name);
+                        Console.WriteLine(data.mail);
+                        Console.WriteLine(data.password);
+                        Console.WriteLine(data.surname);*/
 
+            try {
+                var newStudent = new Etudiant(); /*newStuden generate une ligne vide dans la table etudiant*/
+                newStudent.Nom = data.surname;
+                /*la ligne 119 va recuperer les donnees du form (data.name) pour les inserer dans la table (colonne nom)*/
+                newStudent.Prenom = data.name;
+                newStudent.Email = data.mail;
+                newStudent.Telephone = data.phoneNumber;
+                newStudent.Mdp = data.password;
+
+                _context.Etudiants.Add(newStudent);
+                var status = _context.SaveChanges();/* va commit mes valeurs dans la table c'est comme appuyer sur entrer*/
+                /*apres preparation de la ligne ,le _context va inserer mes valeurs dans la base de donnees */
+                
+                
+                TempData["insertStatus"] = 1;
+                return RedirectToAction(actionName: "LoginPage", controllerName: "Login");
+                
+            }catch(Exception ex) {
+
+
+                TempData["insertStatus"] = 0;
+                TempData["errorMessage"]= ex.Message.ToString();
+                return RedirectToAction(actionName: "Register", controllerName: "Login");
+
+            }
+
+           
+        }
+
+        
 
     }
 }

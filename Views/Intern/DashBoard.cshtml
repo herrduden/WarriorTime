@@ -1,3 +1,175 @@
 ﻿@{
     Layout = "_InternLayout";
 }
+
+
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="home-tab">
+                    <div class="tab-content tab-content-basic">
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="statistics-details d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <p class="statistics-title">Bounce Rate</p>
+                                            <h3 class="rate-percentage">32.53%</h3>
+                                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
+                                        </div>
+                                        <div>
+                                            <p class="statistics-title">Page Views</p>
+                                            <h3 class="rate-percentage">7,682</h3>
+                                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
+                                        </div>
+                                        <div>
+                                            <p class="statistics-title">New Sessions</p>
+                                            <h3 class="rate-percentage">68.8</h3>
+                                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
+                                        </div>
+                                        <div class="d-none d-md-block">
+                                            <p class="statistics-title">Avg. Time on Site</p>
+                                            <h3 class="rate-percentage">2m:35s</h3>
+                                            <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
+                                        </div>
+                                        <div class="d-none d-md-block">
+                                            <p class="statistics-title">New Sessions</p>
+                                            <h3 class="rate-percentage">68.8</h3>
+                                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
+                                        </div>
+                                        <div class="d-none d-md-block">
+                                            <p class="statistics-title">Avg. Time on Site</p>
+                                            <h3 class="rate-percentage">2m:35s</h3>
+                                            <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 d-flex flex-column">
+                                    <div class="row flex-grow">
+                                        <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
+                                            <div class="card card-rounded">
+                                                <div class="card-body">
+                                                    <div class="d-sm-flex justify-content-between align-items-start">
+                                                        <div>
+                                                            <h4 class="card-title card-title-dash">suivi quotidien</h4>
+                                                            <h5 class="card-subtitle card-subtitle-dash"></h5>
+                                                        </div>
+                                                        <div id="performance-line-legend"></div>
+                                                    </div>
+                                                    <div class="chartjs-wrapper mt-5">
+                                                        <canvas id="performaneLine"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+                                    <div class="card card-rounded">
+                                        <div class="card-body card-rounded">
+                                            <h4 class="card-title  card-title-dash">Prochains cours</h4>
+                                            <div class="list align-items-center border-bottom py-2">
+                                                <div class="wrapper w-100">
+                                                    <p class="mb-2 font-weight-medium">
+                                                        Change in Directors
+                                                    </p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="mdi mdi-calendar text-muted me-1"></i>
+                                                            <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list align-items-center border-bottom py-2">
+                                                <div class="wrapper w-100">
+                                                    <p class="mb-2 font-weight-medium">
+                                                        Activité
+                                                    </p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="mdi mdi-calendar text-muted me-1"></i>
+                                                            <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list align-items-center border-bottom py-2">
+                                                <div class="wrapper w-100">
+                                                    <p class="mb-2 font-weight-medium">
+                                                        Quarterly Report
+                                                    </p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="mdi mdi-calendar text-muted me-1"></i>
+                                                            <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list align-items-center border-bottom py-2">
+                                                <div class="wrapper w-100">
+                                                    <p class="mb-2 font-weight-medium">
+                                                        Change in Directors
+                                                    </p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="mdi mdi-calendar text-muted me-1"></i>
+                                                            <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="list align-items-center pt-3">
+                                                <div class="wrapper w-100">
+                                                    <p class="mb-0">
+                                                        <a href="#" class="fw-bold text-primary">Voir tout <i class="mdi mdi-arrow-right ms-2"></i></a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+                                    <div class="card card-rounded">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                                <h4 class="card-title card-title-dash">Activités passées</h4>
+                                                <p class="mb-0">20 finished, 5 remaining</p>
+                                            </div>
+                                            <ul class="bullet-line-list">
+                                                @foreach (var item in ViewBag.previousActivities)
+                                                {
+                                                    <li>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div>cours de <span class="text-light-green">@item.libelleDiscipline</span> avec @item.nomCoach</div>
+                                                            <p>@item.dateCours</p>
+                                                        </div>
+                                                    </li>
+
+                                                }
+                                               
+                                                                                                                                          
+                                            </ul>
+                                            <div class="list align-items-center pt-3">
+                                                <div class="wrapper w-100">
+                                                    <p class="mb-0">
+                                                        <a href="#" class="fw-bold text-primary">Voir tout <i class="mdi mdi-arrow-right ms-2"></i></a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

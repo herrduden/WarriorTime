@@ -1,4 +1,5 @@
-﻿@{
+﻿@model warriorTime.BluePrintForm.BluePrintSignUp;
+@{
     Layout = "_LayoutLogin";
 }
 @*//le   va faire reference au layoutLogin (le layoutLogin s'occupe de l esthetique tandis que le loginPage s'occupe du contenu qui doit s'afficher a savoir le form dans ce cas)
@@ -15,25 +16,31 @@
                         </div>*@
                         <h4>Welcome</h4>
                         <h6 class="fw-light">keep signing up </h6>
-                        <form class="pt-3">
+                        @if (TempData["insertStatus"] != null && (int)TempData["insertStatus"] == 0)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                something went wrong,Registration failed.<br> @TempData["errorMessage"]
+                            </div>
+                        }
+                        <form class="pt-3" asp-action="RegisterInfo" asp-controller="Login" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-lg" id="name" placeholder="name">
+                                <input type="text" asp-for="name" class="form-control form-control-lg" id="name" placeholder="name">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-lg" id="surname" placeholder="surname">
+                                <input type="text" asp-for="surname" class="form-control form-control-lg" id="surname" placeholder="surname">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="mail">
+                                <input type="email" asp-for="mail" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="mail">
                             </div>
                             <div class="form-group">
-                                <input type="tel" class="form-control form-control-lg" id="phoneNumber" placeholder="phone number">
+                                <input type="tel" asp-for="phoneNumber" class="form-control form-control-lg" id="phoneNumber" placeholder="phone number">
                             </div>
                             
                             <div class="form-group">
-                                <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                                <input type="password" asp-for="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                             </div>
                             <div class="mt-3">
-                                <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">sign up</a>
+                                <button  class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">sign up</button>
                             </div>
                            
                             @*  <div class="mb-2">
