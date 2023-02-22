@@ -72,59 +72,25 @@
                                     <div class="card card-rounded">
                                         <div class="card-body card-rounded">
                                             <h4 class="card-title  card-title-dash">Prochains cours</h4>
-                                            <div class="list align-items-center border-bottom py-2">
-                                                <div class="wrapper w-100">
-                                                    <p class="mb-2 font-weight-medium">
-                                                        Change in Directors
-                                                    </p>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="d-flex align-items-center">
-                                                            <i class="mdi mdi-calendar text-muted me-1"></i>
-                                                            <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                            @foreach(var item in ViewBag.futurActivities)
+                                            {
+                                                <div class="list align-items-center border-bottom py-2">
+                                                    <div class="wrapper w-100">
+                                                        <p class="mb-2 font-weight-medium">
+                                                            @item.nomTypeCours avec @item.nomCoach.ToUpper() @item.prenomCoach
+                                                        </p>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <div class="d-flex align-items-center">
+                                                                <i class="mdi mdi-calendar text-muted me-1"></i>
+                                                                <p class="mb-0 text-small text-muted">@item.dateCours</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="list align-items-center border-bottom py-2">
-                                                <div class="wrapper w-100">
-                                                    <p class="mb-2 font-weight-medium">
-                                                        Activité
-                                                    </p>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="d-flex align-items-center">
-                                                            <i class="mdi mdi-calendar text-muted me-1"></i>
-                                                            <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="list align-items-center border-bottom py-2">
-                                                <div class="wrapper w-100">
-                                                    <p class="mb-2 font-weight-medium">
-                                                        Quarterly Report
-                                                    </p>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="d-flex align-items-center">
-                                                            <i class="mdi mdi-calendar text-muted me-1"></i>
-                                                            <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="list align-items-center border-bottom py-2">
-                                                <div class="wrapper w-100">
-                                                    <p class="mb-2 font-weight-medium">
-                                                        Change in Directors
-                                                    </p>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="d-flex align-items-center">
-                                                            <i class="mdi mdi-calendar text-muted me-1"></i>
-                                                            <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                            }
+                                            
+                                            
+                                           
                                             <div class="list align-items-center pt-3">
                                                 <div class="wrapper w-100">
                                                     <p class="mb-0">
@@ -147,7 +113,7 @@
                                                 {
                                                     <li>
                                                         <div class="d-flex justify-content-between">
-                                                            <div>cours de <span class="text-light-green">@item.libelleDiscipline</span> avec @item.nomCoach</div>
+                                                            <div>cours de <span class="text-light-green">@item.libelleDiscipline</span> avec @item.nomCoach.ToUpper() @item.prenomCoach </div>
                                                             <p>@item.dateCours</p>
                                                         </div>
                                                     </li>

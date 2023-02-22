@@ -61,6 +61,7 @@ namespace warriorTime.Controllers
                     HttpContext.Session.SetString("email", student.Email);
                     HttpContext.Session.SetString("telephone", student.Telephone);
                     HttpContext.Session.SetInt32("id", student.IdEtudiant);
+                    HttpContext.Session.SetString("pwd", student.Mdp);
                     /*on redirige le user vers la page de dashboard*/
                     return RedirectToAction(actionName: "DashBoard", controllerName: "Intern");
                 }

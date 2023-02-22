@@ -60,7 +60,7 @@
                                 <p class="mb-1 mt-3 font-weight-semibold">@Context.Session.GetString("nom") @Context.Session.GetString("prenom")</p>
                                 <p class="fw-light text-muted mb-0">@Context.Session.GetString("email")</p>
                             </div>
-                            <a asp-controller="Profil" asp-action="Infos" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Mes informations</a>
+                            <a asp-controller="Intern" asp-action="InfoPerso" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Mes informations</a>
                             <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages <span class="badge badge-pill badge-danger">8</span></a>
                             <a asp-controller="Login" asp-action="SignOut" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Déconnexion</a>
                         </div>
