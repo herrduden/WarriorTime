@@ -117,7 +117,7 @@ namespace warriorTime.Controllers
             return View ();
         }
 
-        public IActionResult UpdatePassword(BluePrintUpdatePassword data)
+        public IActionResult UpdatePassword(BluePrintUserInfo data)
         {
             Console.WriteLine(data.OldPassword);
             Console.WriteLine(data.NewPassword);
@@ -134,6 +134,7 @@ namespace warriorTime.Controllers
 
                     verif.Mdp = data.NewPassword;
                     _context.SaveChanges();
+                    HttpContext.Session.SetString("pwd",data.NewPassword);
 
                 }
                 else
@@ -148,6 +149,30 @@ namespace warriorTime.Controllers
                 TempData["verifOldPwd"] = 0;
             }
             return RedirectToAction(actionName:"InfoPerso",controllerName:"Intern");
+        }
+
+        public IActionResult UpdateTelNum (BluePrintUserInfo data)
+        {
+            Console.WriteLine(data.Telephone);
+            var SignedUser = _context.Etudiants.Where(su => su.IdEtudiant == HttpContext.Session.GetInt32("id")).FirstOrDefault();
+            if (SignedUser != null)
+            {
+                if (data.Telephone.Length==10)
+                {
+                    SignedUser.Telephone = data.Telephone;
+                    _context.SaveChanges(true);
+                    HttpContext.Session.SetString("telephone", data.Telephone);
+                    TempData["changesSaved"] = 1;
+                }
+                else
+                {
+                    TempData["WrongNumber"] = 1;
+                }
+                
+                
+
+            }
+            return RedirectToAction(actionName: "InfoPerso", controllerName: "Intern");
         }
     }
 

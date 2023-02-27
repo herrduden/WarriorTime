@@ -1,4 +1,4 @@
-﻿@model warriorTime.BluePrintForm.BluePrintUpdatePassword;
+﻿@model warriorTime.BluePrintForm.BluePrintUserInfo;
 @using warriorTime.Models;
 @{
     ViewData["Title"] = "Mes informations";
@@ -14,6 +14,19 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Mes informations</h4>
+                        <form method="post" asp-controller="Intern" asp-action="UpdateTelNum">
+                            @if (TempData["changesSaved"] != null && (int)TempData["changesSaved"] == 1)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    The number was modified ○( ＾皿＾)っ Hehehe… "
+                                </div>
+                            }
+                            @if (TempData["WrongNumber"] != null && (int)TempData["WrongNumber"] == 1)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    Please modify your number (っ °Д °;)っ "
+                                </div>
+                            }
                         <div class="form-group">
                             <label>Nom</label>
                             <input type="text" class="form-control form-control-lg" placeholder="Nom" aria-label="lastname" value="@ViewBag.recup.Nom" disabled>
@@ -29,9 +42,10 @@
                         <div class="form-group">
                             <label>Téléphone</label>
                             <!--viewbag correspong a mon sac de transport recup a la variable transportee qui reference l'objet Etudiant pour lequel j'affiche le Telephone -->
-                            <input type="tel" class="form-control form-control-lg" placeholder="Téléphone" aria-label="Tel" value="@ViewBag.recup.Telephone">
+                            <input asp-for="Telephone" maxlength="10" type="tel" class="form-control form-control-lg" placeholder="Téléphone" aria-label="Tel" value="@ViewBag.recup.Telephone">
                         </div>
                         <button type="submit" class="btn btn-primary mb-2">Enregistrer</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -41,7 +55,7 @@
                         @if (TempData["verifOk"] != null && (int)TempData["verifOk"] == 1)
                         {
                                     <div class="alert alert-success" role="alert">
-                                       The Password was modified 😄 "
+                                       🤗 The Password was modified 🤗 "
                                     </div>
                         }
                         @if (TempData["verifPwdIdentique"] != null && (int)TempData["verifPwdIdentique"] == 0)
