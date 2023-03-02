@@ -17,6 +17,30 @@
                     </div>
                 </div>
                 <div class="table-responsive  mt-1">
+                    @if (TempData["Enroll"] != null && (int)TempData["Enroll"] == 1)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    Enrollment successfull o(￣┰￣*)ゞ
+                                </div>
+                            }
+                            @if (TempData["Enroll"] != null && (int)TempData["Enroll"] == 0)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    Something went wrong , please try again (#｀-_ゝ-)
+                                </div>
+                            }
+                            @if (TempData["Cancel"] != null && (int)TempData["Cancel"] == 1)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    Cancel successfully (oﾟvﾟ)ノ
+                                </div>
+                            }
+                            @if (TempData["Cancel"] != null && (int)TempData["Cancel"] == 0)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    Something went wrong , please try again (#｀-_ゝ-)
+                                </div>
+                            }
                     <table class="table select-table">
                         <thead>
                             <tr>
@@ -36,6 +60,7 @@
                                 <th>Nom de Salle</th>
                                 <th>Type de cours</th>
                                 <th>Etat</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,7 +113,30 @@
                                             {
                                                 <td><div class="badge badge-opacity-danger">@item.etatDuCours</div></td>
                                             }
-                                            
+                                            <td>
+                                                @if (!@item.etatDuCours.ToLower().Equals("annule"))
+                                                {
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="ti-settings"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
+
+                                                            @if (item.etatInscription == false)
+                                                            {
+
+                                                                <a class="dropdown-item" asp-route-id="@item.idCours" asp-action="Enroll" asp-controller="Activities">Enroll again</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="dropdown-item" asp-route-id="@item.idCours" asp-action="Cancel" asp-controller="Activities">Cancel</a>
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                }
+                                              
+                                            </td>
                                         </tr>
                                     }
                         

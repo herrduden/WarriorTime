@@ -5,6 +5,11 @@ namespace warriorTime.Models
 {
     public partial class Cour
     {
+        public Cour()
+        {
+            Inscrits = new HashSet<Inscrit>();
+        }
+
         public int IdCours { get; set; }
         public int Duree { get; set; }
         public int? LimiteEtudiant { get; set; }
@@ -20,5 +25,6 @@ namespace warriorTime.Models
         public virtual Discipline? IdDisciplineNavigation { get; set; }
         public virtual Typecour IdTypeCoursNavigation { get; set; } = null!;
         public virtual Salle? IdsalleDeClasseNavigation { get; set; }
+        public virtual ICollection<Inscrit> Inscrits { get; set; }
     }
 }

@@ -261,6 +261,15 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+                $(".alert").slideUp(500);
+            });
+        });</script>
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="~/vendors/js/vendor.bundle.base.js"></script>

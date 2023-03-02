@@ -213,14 +213,14 @@ namespace warriorTime.Models
 
             modelBuilder.Entity<Inscrit>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.IdCours, e.IdEtudiant })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
                 entity.ToTable("inscrit");
 
                 entity.HasCharSet("utf8")
                     .UseCollation("utf8_general_ci");
-
-                entity.HasIndex(e => e.IdCours, "fk_inscrit_cours");
 
                 entity.HasIndex(e => e.IdEtudiant, "fk_inscrit_etudiant");
 
@@ -235,13 +235,13 @@ namespace warriorTime.Models
                 entity.Property(e => e.StudentStatus).HasColumnName("studentStatus");
 
                 entity.HasOne(d => d.IdCoursNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Inscrits)
                     .HasForeignKey(d => d.IdCours)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_inscrit_cours");
 
                 entity.HasOne(d => d.IdEtudiantNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Inscrits)
                     .HasForeignKey(d => d.IdEtudiant)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_inscrit_etudiant");
