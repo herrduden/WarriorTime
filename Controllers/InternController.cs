@@ -122,6 +122,14 @@ namespace warriorTime.Controllers
             Console.WriteLine(data.OldPassword);
             Console.WriteLine(data.NewPassword);
             Console.WriteLine(data.ConfirmNewPassword);
+            if (HttpContext.Session.GetString("pwd").Equals(data.NewPassword))
+            {
+                Console.WriteLine("le meme");
+                TempData["OldNewEquals"] = 1;
+                return RedirectToAction(actionName: "InfoPerso", controllerName: "Intern");
+
+
+            }
 
             if (HttpContext.Session.GetString("pwd").Equals(data.OldPassword))
             {

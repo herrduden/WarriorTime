@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "_InternLayout";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row flex-grow">
+            @foreach (var item in ViewBag.allCours)
+            {
+                <div class="col-4 grid-margin stretch-card">
+                    <div class="card card-rounded">
+                        <div class="card-body">
+                            <div class="d-sm-flex justify-content-between align-items-start">
+                                <div>
+                                    <h4 class="card-title card-title-dash">@item.typeCours de @item.libelleDiscipline avec @item.nomPrenomCoach</h4>
+                                    <p class="card-subtitle card-subtitle-dash">Le @item.dateCours &Aacute; @item.ville  </p>
+
+                                    <span><i style="font-size:20px;color:#2C7DAB" class="ti ti-location-pin"></i> @item.adresse </span> <br>
+                                       
+                                            @if (item.equipement==1)
+                                                {
+                                                    <span><i style="font-size:20px;color:#2C7DAB" class="ti ti-package"></i> equipement obligatoire</span> <br>
+                                                }
+                                            else
+                                                {
+                                                    <span><i style="font-size:20px;color:#2C7DAB" class="ti ti-package"></i> equipement facultatif</span> <br>
+                                                }
+
+                                        <span><i style="font-size:20px;color:#2C7DAB" class="ti ti-user"></i> @item.pour </span> <br>
+                                    <span><i style="font-size:20px;color:#2C7DAB" class="ti ti-flag-alt-2"></i> @item.nomSalle </span> <br>
+                                        <span><i style="font-size:20px;color:#2C7DAB" class="ti ti-filter"></i> @item.maximum </span>
+                                    <br>
+                                    <a asp-action="Register" asp-controller="Cours" asp-route-id="@item.idCours" class="btn btn-dark btn-rounded btn-fw">S'inscrire</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+           
+        </div>
+    </div>
+
+</div>

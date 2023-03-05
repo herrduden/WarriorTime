@@ -70,6 +70,12 @@
                                 The old  Password doesn't match  ༼ つ ◕_◕ ༽つ "
                             </div>
                         }
+                        @if (TempData["OldNewEquals"] != null && (int)TempData["OldNewEquals"] == 1)
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                Password can't be the same as the current one┗( T﹏T )┛ "
+                            </div>
+                        }
 
                         
                         <form asp-action="UpdatePassword" asp-controller="Intern" method="post">

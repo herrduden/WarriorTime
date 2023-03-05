@@ -253,6 +253,12 @@
                             <span class="menu-title">Consulter</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="GetCours" asp-controller="Cours">
+                            <i class="mdi mdi-grid-large menu-icon"></i>
+                            <span class="menu-title">Nouveau Cours</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             @RenderBody()
@@ -266,10 +272,14 @@
             crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".alert").fadeTo(2000, 500).slideUp(500, function () {
-                $(".alert").slideUp(500);
+            $(".alert").fadeTo(2000, 2000).slideUp(2000, function () {
+                $(".alert").slideUp(2000);
             });
         });</script>
+
+        <!-- le script JS permet de modifier le temps que va s'afficher les notifications ^-->
+
+
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="~/vendors/js/vendor.bundle.base.js"></script>
