@@ -2,6 +2,7 @@
 using warriorTime.BluePrintForm;
 using System.Diagnostics;
 using warriorTime.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace warriorTime.Controllers
 {
@@ -68,8 +69,18 @@ namespace warriorTime.Controllers
             }
             else
             {
-                Console.WriteLine("coach connexion to be implemented");
-                return RedirectToAction(actionName: "LoginPage", controllerName: "Login");
+                var coach = _context.Coaches.Where(coachCredentials => coachCredentials.Mail.Equals(data.Email) && coachCredentials.Mdp.Equals(data.Password)).FirstOrDefault();
+                if (coach != null) {
+                    HttpContext.Session.SetString("nom", coach.Nom);
+                    HttpContext.Session.SetString("prenom",coach.Prenom);
+                    HttpContext.Session.SetString("email",coach.Mail);
+                    HttpContext.Session.SetString("telephone",coach.Tel);
+                    HttpContext.Session.SetInt32("id",coach.IdCoach);
+                    HttpContext.Session.SetString("pwd",coach.Mdp);
+
+                    return RedirectToAction(actionName: "DashBoardCoach", controllerName: "Intern");
+                }
+               
             }
             
          

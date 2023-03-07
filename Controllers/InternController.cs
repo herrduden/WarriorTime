@@ -182,6 +182,11 @@ namespace warriorTime.Controllers
             }
             return RedirectToAction(actionName: "InfoPerso", controllerName: "Intern");
         }
+
+        public IActionResult DashboardCoach()
+        {
+            return View();
+        }
     }
 
     
