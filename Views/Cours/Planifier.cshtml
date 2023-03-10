@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "_InternLayoutCoach";
+}
+@model warriorTime.BluePrintForm.BluePrintCreationCours;
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Mes informations</h4>
+                        <form method="post" asp-controller="Cours" asp-action="CreerCours" >
+                            
+                            <div class="form-group">
+                                <label>Durée</label>
+                                <input type="number" asp-for="Duree" class="form-control form-control-lg" placeholder="Durée" aria-label="lastname" >
+                            </div>
+                            <div class="form-group">
+                                <label>Limite Etudiant </label>
+                                <input type="number" asp-for="Limite" class="form-control form-control-lg" placeholder="Limite" aria-label="surname">
+                            </div>
+                            <div class="form-group">
+                                <label>Date Cours</label>
+                                <input type="date" asp-for="Date" class="form-control form-control-lg" placeholder="Date" aria-label="Email">
+                            </div>
+                             <div class="form-group">
+                                <select class="form-control form-control-lg" asp-for="Pour" id="exampleInputSelect" required>
+                                    <option disabled selected value="">Pour</option>
+                                    <option value="Enfants">Enfants</option>
+                                    <option value="Hommes">Hommes</option>
+                                    <option value="Femmes">Femmes</option>
+                                    <option value="Mixte">Mixte</option>
+                                </select>
+                            </div>     
+                            <div class="form-group">
+                                <select class="form-control form-control-lg" asp-for="IdSalle" id="exampleInputSelect" required>
+                                    <option disabled selected value="">Choisir la salle</option>
+                                    @foreach (var item in ViewBag.salle )
+                                    {
+                                        <option value="@item.IdsalleDeClasse">@item.Nom, @item.Adresse, @item.Ville</option>
+                                    }
+                                    
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control form-control-lg" asp-for="IdDiscipline" id="exampleInputSelect" required>
+                                    <option disabled selected value="">Choisir la Disicpline</option>
+                                   
+                                    @foreach (var item in ViewBag.discipline)
+                                    {
+                                        var equipement = "Equipement obligatoire";
+                                        @if (item.Equipement == 0)
+                                        {
+                                            equipement ="Pas d'équipement necessaire ";
+                                        }
+                                        <option value="@item.IdDiscipline">@item.libelle, @equipement</option>
+                                    }
+
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control form-control-lg" asp-for="IdTypeCours" id="exampleInputSelect" required>
+                                    <option disabled selected value="">Choisir le type de cours </option>
+                                    @foreach (var item in ViewBag.typeCours)
+                                    {
+                                   <option value="@item.IdTypeCours">@item.LibelleCours</option>
+                                    }
+
+
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-2">Enregistrer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>         
+        </div>
+    </div>
+</div>

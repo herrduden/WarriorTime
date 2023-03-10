@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using System.Linq;
+using warriorTime.BluePrintForm;
 using warriorTime.Models;
 
 namespace warriorTime.Controllers
@@ -31,9 +33,14 @@ namespace warriorTime.Controllers
                 on cours.IdsalleDeClasse equals salle.IdsalleDeClasse
                 join typeCours in _context.Typecours
                 on cours.IdTypeCours equals typeCours.IdTypeCours
-               
-                
-                
+                where !(
+                    from inscrit in _context.Inscrits
+                    where inscrit.IdEtudiant == HttpContext.Session.GetInt32("id")
+                    select inscrit.IdCours
+                    ).Contains(cours.IdCours)
+
+
+
                 select new
                 {
                     idCours = cours.IdCours,
@@ -117,7 +124,38 @@ namespace warriorTime.Controllers
         public IActionResult planifier()
         {
             Console.WriteLine("planification");
+            var typeCours = (from tc in _context.Typecours select new { tc.IdTypeCours, tc.LibelleCours }).ToList();
+            var salle = (from s in _context.Salles select new { s.IdsalleDeClasse, s.Adresse, s.Capacite, s.Ville, s.Nom }).ToList();
+            var discipline = (from d in _context.Disciplines select new {libelle=d.Discipline1,d.Equipement,d.IdDiscipline }).ToList();
+            ViewBag.typeCours=typeCours;
+            ViewBag.salle = salle;  
+            ViewBag.discipline = discipline;
             return View();
+        }
+
+        public IActionResult CreerCours(BluePrintCreationCours data)
+        {
+            Console.WriteLine(data.Date); /*format string*/
+            var insertionNewCours = new Cour();
+            /* on creer une instance de notre table cours
+                data.X -> data qu'on recupere du blueprint
+                on lui dit que c'est egal au champs de notre base de donnes ->  insertionNewCours.X = 
+             */
+            insertionNewCours.Pour = data.Pour;
+            insertionNewCours.IdCoach = HttpContext.Session.GetInt32("id");
+            insertionNewCours.DateCours = DateOnly.Parse(data.Date, new CultureInfo("us-US",false));
+            insertionNewCours.LimiteEtudiant = data.Limite;
+            insertionNewCours.Duree = data.Duree;
+            insertionNewCours.IdsalleDeClasse = data.IdSalle;
+            insertionNewCours.IdDiscipline=data.IdDiscipline;
+            insertionNewCours.IdTypeCours= data.IdTypeCours;
+            /* ligne du dessous permet l'insertion de la ligne dans la Database*/
+            Console.WriteLine(insertionNewCours.DateCours);
+            _context.Cours.Add(insertionNewCours);
+            _context.SaveChanges(); 
+
+
+            return RedirectToAction(actionName:"planifier", controllerName:"Cours");
         }
     }
 }
