@@ -16,6 +16,18 @@
                             <!-- <!--ViewBag.futurActivities.Lenght cours a mettre -->
                         </div>
                         <div class="table-responsive  mt-1">
+                            @if (TempData["modifyDate"] != null && (int)TempData["modifyDate"] == 1)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    modification successfull o(￣┰￣*)ゞ
+                                </div>
+                            }
+                            @if (TempData["modifyDate"] != null && (int)TempData["modifyDate"] == 0)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    try again ╰（‵□′）╯
+                                </div>
+                            }
                            
                             <table class="table select-table">
                                 <thead>
@@ -51,7 +63,23 @@
                                             <td>@item.adresse</td>
                                             <td>@item.nomSalle</td>
                                             <td>@item.typeCours</td>
-                                            <td><a class="btn btn-dark btn-rounded btn-fw">More details</a></td>
+                                            <td>
+                                                
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuIconButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="ti-settings"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
+
+                                                             <a class="dropdown-item" asp-route-id="@item.idCours" asp-action="MoreDetails" asp-controller="Cours">More details</a>
+                                                             <a class="dropdown-item" asp-route-id="@item.idCours" asp-action="PostPone" asp-controller="Cours">Postpone</a>
+                                                             <a class="dropdown-item" asp-route-id="@item.idCours" asp-action="Cancel" asp-controller="Cours">Cancel</a>
+                                                             <a class="dropdown-item" asp-route-id="@item.idCours" asp-action="Delete" asp-controller="Cours">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                
+
+                                            </td>
                                             
                                         </tr>
                                     }

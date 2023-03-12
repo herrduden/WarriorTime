@@ -11,7 +11,20 @@
                     <div class="card-body">
                         <h4 class="card-title">Mes informations</h4>
                         <form method="post" asp-controller="Cours" asp-action="CreerCours" >
-                            
+                            @if (TempData["insertionCours"] != null && (int)TempData["insertionCours"] == 1)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    Cours bien ajouté ! (●'◡'●)
+                                </div>
+                            }
+                            @if (TempData["insertionCours"] != null && (int)TempData["insertionCours"] == 0)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    veuillez re-essayer (⊙x⊙;)
+                                </div>
+                            }
+
+
                             <div class="form-group">
                                 <label>Durée</label>
                                 <input type="number" asp-for="Duree" class="form-control form-control-lg" placeholder="Durée" aria-label="lastname" >

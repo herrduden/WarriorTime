@@ -135,27 +135,97 @@ namespace warriorTime.Controllers
 
         public IActionResult CreerCours(BluePrintCreationCours data)
         {
-            Console.WriteLine(data.Date); /*format string*/
-            var insertionNewCours = new Cour();
-            /* on creer une instance de notre table cours
-                data.X -> data qu'on recupere du blueprint
-                on lui dit que c'est egal au champs de notre base de donnes ->  insertionNewCours.X = 
-             */
-            insertionNewCours.Pour = data.Pour;
-            insertionNewCours.IdCoach = HttpContext.Session.GetInt32("id");
-            insertionNewCours.DateCours = DateOnly.Parse(data.Date, new CultureInfo("us-US",false));
-            insertionNewCours.LimiteEtudiant = data.Limite;
-            insertionNewCours.Duree = data.Duree;
-            insertionNewCours.IdsalleDeClasse = data.IdSalle;
-            insertionNewCours.IdDiscipline=data.IdDiscipline;
-            insertionNewCours.IdTypeCours= data.IdTypeCours;
-            /* ligne du dessous permet l'insertion de la ligne dans la Database*/
-            Console.WriteLine(insertionNewCours.DateCours);
-            _context.Cours.Add(insertionNewCours);
-            _context.SaveChanges(); 
+            try
+            {
+                Console.WriteLine(data.Date); /*format string*/
+                var insertionNewCours = new Cour();
+                /* on creer une instance de notre table cours
+                    data.X -> data qu'on recupere du blueprint
+                    on lui dit que c'est egal au champs de notre base de donnes ->  insertionNewCours.X = 
+                 */
+                insertionNewCours.Pour = data.Pour;
+                insertionNewCours.IdCoach = HttpContext.Session.GetInt32("id");
+                insertionNewCours.DateCours = DateOnly.ParseExact(data.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                insertionNewCours.LimiteEtudiant = data.Limite;
+                insertionNewCours.Duree = data.Duree;
+                insertionNewCours.IdsalleDeClasse = data.IdSalle;
+                insertionNewCours.IdDiscipline = data.IdDiscipline;
+                insertionNewCours.IdTypeCours = data.IdTypeCours;
+                insertionNewCours.Statut = "maintenu";
+                /* ligne du dessous permet l'insertion de la ligne dans la Database*/
+                Console.WriteLine(insertionNewCours.DateCours);
+                _context.Cours.Add(insertionNewCours);
+                var status = _context.SaveChanges();
+                if (status > 0)
+                {
+                    TempData["insertionCours"] = 1;
+                }
+                else
+                {
+                    TempData["insertionCours"] = 0;
+                }
+            }
+            catch (Exception)
+            {
+                TempData["insertionCours"] = 0;
+
+            }
+            
+
+            
 
 
             return RedirectToAction(actionName:"planifier", controllerName:"Cours");
         }
+        
+
+        [Route("/Cours/PostPone/{idCours}")]     
+        public IActionResult PostPone(int idCours)
+        {
+            var cours = _context.Cours.Where(c => c.IdCours == idCours).FirstOrDefault();
+            ViewBag.DateCours = cours.DateCours;
+            ViewBag.IdCours = idCours;
+            return View();
+        }
+
+        public IActionResult PostPoneUpdate(BluePrintPostPone data)
+        {
+            TempData["modifyDate"] = 1;
+            if (DateTime.ParseExact(data.Date,"yyyy-MM-dd",CultureInfo.InvariantCulture) > DateTime.UtcNow.Date)
+            {
+                var cours = _context.Cours.Where(c => c.IdCours == data.IdCours).FirstOrDefault();
+                cours.DateCours = DateOnly.ParseExact(data.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                _context.SaveChanges();
+            }
+            else
+            {
+                TempData["modifyDate"] = 0;
+            }
+          
+            return RedirectToAction(actionName: "consulter", controllerName: "Cours");
+
+        }
+
+
+        [Route("/Cours/Cancel/{idCours}")]
+        public IActionResult Cancel(int idCours)
+        {
+            var cours = _context.Cours.Where(c => c.IdCours == idCours).FirstOrDefault();
+            cours.Statut = "annule";
+            _context.SaveChanges();
+
+            return RedirectToAction(actionName: "consulter", controllerName: "Cours");
+        }
+
+        public IActionResult Delete()
+        {
+            return RedirectToAction(actionName: "consulter", controllerName: "Cours");
+        }
+
+        public IActionResult MoreDetails()
+        {
+            return RedirectToAction(actionName: "consulter", controllerName: "Cours");
+        }
+
     }
 }

@@ -1,0 +1,32 @@
+﻿@model warriorTime.BluePrintForm.BluePrintPostPone;
+@{
+   
+    ViewData["Title"] = "PostPone";
+    //var student = ViewBag.Message;
+    Layout = "_InternLayoutCoach";
+}
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Choisir une Date pour le cours du @ViewBag.DateCours </h4>
+                        <form method="post" asp-controller="Cours" asp-action="PostPoneUpdate" >                  
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" asp-for="Date"   class="form-control form-control-lg" placeholder="Date" aria-label="lastname" value="" required>
+                                <input type="hidden" asp-for="IdCours" value="@ViewBag.IdCours">
+                            </div>                                                                                 
+                            <button type="submit" class="btn btn-primary mb-2">Enregistrer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
