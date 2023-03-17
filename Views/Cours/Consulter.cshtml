@@ -28,6 +28,12 @@
                                     try again ╰（‵□′）╯
                                 </div>
                             }
+                            @if (TempData["coursDelete"] != null && (int)TempData["coursDelete"] == 1)
+                            {
+                                <div class="alert alert-info" role="alert">
+                                    Le cours a bien etait delete !  （︶^︶）
+                                </div>
+                            }
                            
                             <table class="table select-table">
                                 <thead>

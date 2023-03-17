@@ -237,7 +237,6 @@ namespace warriorTime.Models
                 entity.HasOne(d => d.IdCoursNavigation)
                     .WithMany(p => p.Inscrits)
                     .HasForeignKey(d => d.IdCours)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_inscrit_cours");
 
                 entity.HasOne(d => d.IdEtudiantNavigation)

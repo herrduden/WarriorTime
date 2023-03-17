@@ -217,14 +217,50 @@ namespace warriorTime.Controllers
             return RedirectToAction(actionName: "consulter", controllerName: "Cours");
         }
 
-        public IActionResult Delete()
+        [Route("/Cours/delete/{idCours}")]
+        public IActionResult Delete(int idCours)
         {
+            TempData["coursDelete"] = 1;
+            try
+            {
+                var cours = _context.Cours.Where(c => c.IdCours == idCours).FirstOrDefault();
+                _context.Cours.Remove(cours);
+                
+            }
+            catch (Exception ex)
+            {
+                var cours = _context.Cours.Where( x => x.IdCours==idCours ).FirstOrDefault();
+                cours.Statut = "annule";
+                
+              
+            }
+            _context.SaveChanges();
+           
             return RedirectToAction(actionName: "consulter", controllerName: "Cours");
         }
 
-        public IActionResult MoreDetails()
+        [Route("/Cours/MoreDetails/{idCours}")]
+        public IActionResult MoreDetails(int idCours)
         {
-            return RedirectToAction(actionName: "consulter", controllerName: "Cours");
+            var studentInscrit = (
+                from etudiant in _context.Etudiants
+                join inscrit in _context.Inscrits
+                on etudiant.IdEtudiant equals inscrit.IdEtudiant
+                where inscrit.IdCours == idCours
+                select new
+                {
+                    nameStudent = etudiant.Nom,
+                    fnamestudent = etudiant.Prenom,
+                    mailStudent = etudiant.Email,
+                    statusEtudiant = inscrit.StudentStatus,
+                    telStudent = etudiant.Telephone
+                }
+
+                ).ToList();
+
+            ViewBag.etudiantInscrit = studentInscrit;
+            /* recuperer les info de l etudiant inscrit au cours*/
+            return View();
         }
 
     }

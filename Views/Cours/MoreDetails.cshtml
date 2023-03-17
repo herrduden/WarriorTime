@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "_InternLayout";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row flex-grow">
+            @foreach (var item in ViewBag.etudiantInscrit)
+            {
+                <div class="col-4 grid-margin stretch-card">
+                    <div class="card card-rounded">
+                        <div class="card-body">
+                            <div class="d-sm-flex justify-content-between align-items-start">
+                                <div>
+                                    <h4 class="card-title card-title-dash">@item.nameStudent  @item.fnamestudent  </h4>                                  
+                                    <span><i style="font-size:20px;color:#2C7DAB" class="ti ti-location-pin"></i> @item.mailStudent </span> <br>                                            
+                                    <span><i style="font-size:20px;color:#2C7DAB" class="ti ti-user"></i> @item.telStudent </span> <br>
+                                    <span><i style="font-size:20px;color:#2C7DAB" class="ti ti-flag-alt-2"></i> @item.statusEtudiant </span> <br>                                    
+                                    <br>                                  
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>
